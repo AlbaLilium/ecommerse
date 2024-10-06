@@ -9,15 +9,23 @@ class User(models.Model):
     class Meta:
         abstract = True
 
+
+class Customer(User):
+    name = models.CharField(max_length=50, default='')
+    surname = models.CharField(max_length=30, default='')
+
+
 class Seller(User):
-   website = models.URLField(default='')
+    name = models.CharField(max_length=30)
+    description = models.TextField(max_length=300, default='')
+    website = models.URLField(default='')
 
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField()
-    cost = models.DecimalField()
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
     sellers = models.ManyToManyField(Seller, related_name='product', on_delete=models.CASCADE)
     available = models.BooleanField()
 
