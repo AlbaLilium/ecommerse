@@ -52,4 +52,19 @@ class ShoppingCart(models.Model):
     item_total = models.DecimalField(max_digits=10, decimal_places=2)
 
 
+class Payment(models.Model):
+    class PaymentMethod(models.TextChoices):
+        ONLINE = "online"
+        CREDIT_CARD = "credit_card"
+        CASH = "cash"
 
+    class PaymentStatus(models.IntegerChoices, models.Choices):
+        FAILED = 0, "Failed"
+        SUCCESS = 1, "Success"
+
+    status = models.CharField(choices=PaymentStatus)
+    order = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    payment_method = models.CharField(choices=PaymentMethod)
+    date = models.DateTimeField(auto_now_add=True)
