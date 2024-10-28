@@ -1,5 +1,5 @@
 """
-URL configuration for ecommerce_platform project.
+URL configuration for backend-settings project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -16,8 +16,9 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 urlpatterns = [
+    path("polls/", include("core.urls")), # TODO: change urls_pattern
     path("admin/", admin.site.urls),
 ]
