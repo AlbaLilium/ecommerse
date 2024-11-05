@@ -1,13 +1,8 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.views.decorators.http import condition
 
-
-class User(models.Model):
-    email = models.EmailField()
-    password = models.CharField(max_length=120)
-
-    class Meta:
-        abstract = True
+class User(AbstractUser):
+    pass
 
 
 class Customer(User):
